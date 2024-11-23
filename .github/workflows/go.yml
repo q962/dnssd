@@ -25,13 +25,12 @@ jobs:
       with:
         go-version: 'stable'
         
-    - name: Install dnssd
+    - name: build dnssd
       run: |
-        export GOPATH=`pwd`/dnssd
-        go install github.com/brutella/dnssd/cmd/dnssd@$GITHUB_REF_NAME
-        cd dnssd/bin
+        cd cmd/dnssd
+        go build .
         mv dnssd dnssd-${{ runner.os }}
-
+        
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
