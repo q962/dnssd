@@ -28,14 +28,15 @@ jobs:
     - name: build dnssd
       run: |
         cd cmd/dnssd
-        go build .
-        mv dnssd dnssd-${{ runner.os }}
+        mkdir bin
+        go build -o bin .
+        mv bin/dnssd bin/dnssd-${{ runner.os }}
         
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: dnssd-${{ runner.os }}
-        path: dnssd/bin/dnssd*
+        path: cmd/dnssd/bin/dnssd*
 
   Upload:
     runs-on: ubuntu-latest
